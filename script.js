@@ -59,23 +59,23 @@ class Pellete{
         ctx.closePath()
     }
 }
-const Squares = [['1','1','1', '1','1','1','1','1','1','1','1', '1','1','1'],
-                ['1', '.','.',' ',' ',' ',' ',' ',' ',' ',' ', ' ', ' ','1'],
-                ['1', ' ', ' ','1', ' ','1','1',' ',' ','1','1',' ',' ','1'],
-                ['1', ' ', ' ', ' ',' ', ' ','1',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', '1',' ',' ','1', '1',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', ' ', '1', ' ',' ',' ',' ',' ',' ', '1','1',' ' ,'1'],
-                ['1', ' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ','1'],
-                ['1', ' ', '1', '1', ' ','1','1',' ',' ','1','1',' ',' ','1'],
-                ['1', ' ', ' ', ' ',' ',' ',' ',' ','',' ',' ',' ', ' ','1'],
-                ['1', ' ', '1', ' ', '1',' ',' ','1','1',' ',' ',' ', ' ','1'],
-                ['1', ' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', '1', '1',' ','1','1',' ',' ','1','1',' ', ' ','1'],
-                ['1', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', '1', '1', '1','1','1','1','1','1', '1','1','1','1','1']]
+const Squares = [['1','1','1', '1','1','1','1','1','1','1','1', '1','1'],
+                ['1', '.','.',' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
+                ['1', ' ', ' ','1', ' ','1','1','1',' ','1','1',' ','1'],
+                ['1', ' ', ' ', ' ',' ', ' ','1',' ',' ',' ',' ', ' ','1'],
+                ['1', ' ', '1',' ',' ',' ', ' ',' ',' ',' ',' ',' ','1'],
+                ['1', ' ', ' ', '1', ' ',' ','1',' ',' ','1', '1',' ','1'],
+                ['1', ' ', ' ', ' ', ' ','1','1','1',' ',' ',' ',' ','1'],
+                ['1', ' ', '1', '1', ' ',' ','1',' ',' ','1','1',' ','1'],
+                ['1', ' ', ' ', ' ',' ',' ',' ',' ','',' ',' ', ' ','1'],
+                ['1', ' ', '1', ' ', '1',' ',' ','1','1',' ',' ', ' ','1'],
+                ['1', ' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ', ' ','1'],
+                ['1', ' ', '1', '1',' ','1','1',' ',' ','1','1', ' ','1'],
+                ['1', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
+                ['1', '1', '1', '1','1','1','1','1','1', '1','1','1','1']]
 const alotOfSquares = [] // array of squares
 const pelletes =[]       // array of white balls   
-const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:5,y:0}})]
+const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:0,y:3}})]
 
 
 //=============== creating the squares  and the pellets on the canavas
@@ -142,7 +142,7 @@ function moving() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     pelletes.forEach((Pellete,index)=> {
         Pellete.draw()
-        
+
         if (Math.hypot(Pellete.position.x-pacman.position.x,Pellete.position.y-pacman.position.y)< (Pellete.radius+pacman.radius )){
             pelletes.splice(index,1)
             score+=10
@@ -222,7 +222,7 @@ pacman.velocity.x = 0
         //if(JSON.stringifycollisions(collisions)!== JSON.stringify (ghost.prevCollisions))
         console.log('ds')
     })
-    
+
 }
 moving()
 
@@ -264,14 +264,14 @@ window.addEventListener('keyup', ({ key }) => {
 })
 
 function circleCollidesWithRectangle({circle,rectangle}){
+    const padding = Square.width/2-circle.radius-1
     return (circle.position.y - circle.radius+circle.
-        velocity.y  <= rectangle.position.y + rectangle.height
+        velocity.y  <= rectangle.position.y + rectangle.height+padding
         && circle.position.x + circle.radius +circle.velocity.x>= rectangle.
-        position.x 
+        position.x - padding
          && circle.position.y + circle.radius+circle.velocity.y >= rectangle.
-         position.y
+         position.y - padding
           && circle.position.x - circle.radius+circle.velocity.x <= rectangle.position.x + rectangle.
-          width) 
+          width+ padding) 
 }
-
 
