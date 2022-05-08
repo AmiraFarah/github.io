@@ -25,15 +25,16 @@ class Square {
 
 //======================= Ghost Class ==================
 class Ghost {
-    constructor({ position, velocity }) {
+    constructor({ position, velocity , color}) {
         this.position = position
         this.velocity = velocity
         this.radius = 13
+        this.color = color
         this.prevCollisions = []
     }
     draw() {
         ctx.beginPath()
-        ctx.fillStyle = 'red'
+        ctx.fillStyle = this.color
         ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
         ctx.fill()
         ctx.closePath()
@@ -75,7 +76,8 @@ const Squares = [['1','1','1', '1','1','1','1','1','1','1','1', '1','1'],
                 ['1', '1', '1', '1','1','1','1','1','1', '1','1','1','1']]
 const alotOfSquares = [] // array of squares
 const pelletes =[]       // array of white balls   
-const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:0,y:3}})]
+const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:0,y:0},color:'red'}),
+new Ghost({position:{x: Square.width*5 + Square.width / 2, y: Square.height *9+ Square.height / 2 }, velocity:{x:1,y:1}, color : 'green'})]
 
 
 //=============== creating the squares  and the pellets on the canavas
@@ -109,11 +111,14 @@ class PacMan {
         this.position = position
         this.velocity = velocity
         this.radius = 13
+        this .radians = 0.75
+        this.openRate = 0.12
     }
     draw() {
         ctx.beginPath()
         ctx.fillStyle = 'yellow'
-        ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+        ctx.lineTo(this.position.x,this.position.y)
+        ctx.arc(this.position.x, this.position.y, this.radius,this.radians, Math.PI * 2-this.radians)
         ctx.fill()
         ctx.closePath()
     }
@@ -121,7 +126,8 @@ class PacMan {
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
-
+        if (this.radians<0|| this.radians>.75) this.openRate= - this.openRate
+this.radians+= this.openRate
     }
 }
 
@@ -137,8 +143,10 @@ pacman.update();
 
 
 //===================== moving PacMan and Eating pelletes ==============
+let animationId
+
 function moving() {
-    requestAnimationFrame(moving)
+    animationId=requestAnimationFrame(moving)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     pelletes.forEach((Pellete,index)=> {
         Pellete.draw()
@@ -148,6 +156,7 @@ function moving() {
             score+=10
             scores.innerHTML=score
         }
+        if (score === 980) { prompt('you won')}
     })
     alotOfSquares.forEach((Square) => {
         Square.draw()
@@ -161,6 +170,11 @@ pacman.velocity.x = 0
     pacman.update()
     ghosts.forEach((ghost) =>{
         ghost.update()
+        if (Math.hypot(ghost.position.x-pacman.position.x,ghost.position.y-pacman.position.y)< (ghost.radius+pacman.radius )){
+            cancelAnimationFrame(animationId)
+        console.log('you lose')   
+        const stop = prompt('you lost')
+        }
         const collisions = []
         alotOfSquares.forEach(square=>{
             if (
@@ -219,10 +233,15 @@ pacman.velocity.x = 0
         })
         if (collisions.length> ghost.prevCollisions.length)
         ghost.prevCollisions = collisions
-        //if(JSON.stringifycollisions(collisions)!== JSON.stringify (ghost.prevCollisions))
-        console.log('ds')
+        if(JSON.stringify(collisions)!== JSON.stringify (ghost.prevCollisions)){
+if (ghost.velocity.x> 0 ){ ghost.prevCollisions.push('right')
+console.log(collisions)}
+            
+const pathways = ghost.prevCollisions.filter((collision)=>{
+    return !collisions.includes(collision)
+})
+        }
     })
-
 }
 moving()
 
@@ -242,7 +261,6 @@ window.addEventListener('keydown', ({ key }) => {
             pacman.velocity.x = 5
             break
     }
-    console.log(pacman.velocity)
 })
 //=============================when we are releasing  the keys
 window.addEventListener('keyup', ({ key }) => {
@@ -260,7 +278,6 @@ window.addEventListener('keyup', ({ key }) => {
             pacman.velocity.x = 0
             break
     }
-    console.log(pacman.velocity)
 })
 
 function circleCollidesWithRectangle({circle,rectangle}){
