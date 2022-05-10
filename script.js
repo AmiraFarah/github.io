@@ -25,7 +25,7 @@ class Square {
 
 //======================= Ghost Class ==================
 class Ghost {
-    constructor({ position, velocity , color}) {
+    constructor({ position, velocity, color }) {
         this.position = position
         this.velocity = velocity
         this.radius = 13
@@ -47,7 +47,7 @@ class Ghost {
     }
 }
 //================================ creating white pellets class======================
-class Pellete{
+class Pellete {
     constructor({ position }) {
         this.position = position
         this.radius = 8
@@ -60,24 +60,24 @@ class Pellete{
         ctx.closePath()
     }
 }
-const Squares = [['1','1','1', '1','1','1','1','1','1','1','1', '1','1'],
-                ['1', '.','.',' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', ' ','1', ' ','1','1','1',' ','1','1',' ','1'],
-                ['1', ' ', ' ', ' ',' ', ' ','1',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', '1',' ',' ',' ', ' ',' ',' ',' ',' ',' ','1'],
-                ['1', ' ', ' ', '1', ' ',' ','1',' ',' ','1', '1',' ','1'],
-                ['1', ' ', ' ', ' ', ' ','1','1','1',' ',' ',' ',' ','1'],
-                ['1', ' ', '1', '1', ' ',' ','1',' ',' ','1','1',' ','1'],
-                ['1', ' ', ' ', ' ',' ',' ',' ',' ','',' ',' ', ' ','1'],
-                ['1', ' ', '1', ' ', '1',' ',' ','1','1',' ',' ', ' ','1'],
-                ['1', ' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', ' ', '1', '1',' ','1','1',' ',' ','1','1', ' ','1'],
-                ['1', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ', ' ','1'],
-                ['1', '1', '1', '1','1','1','1','1','1', '1','1','1','1']]
+const Squares = [['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
+['1', '.', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
+['1', ' ', ' ', '1', ' ', '1', '1', '1', ' ', '1', '1', ' ', '1'],
+['1', ' ', ' ', ' ', ' ', ' ', '1', ' ', ' ', ' ', ' ', ' ', '1'],
+['1', ' ', '1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
+['1', ' ', ' ', '1', ' ', ' ', '1', ' ', ' ', '1', '1', ' ', '1'],
+['1', ' ', ' ', ' ', ' ', '1', '1', '1', ' ', ' ', ' ', ' ', '1'],
+['1', ' ', '1', '1', ' ', ' ', '1', ' ', ' ', '1', '1', ' ', '1'],
+['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '', ' ', ' ', ' ', '1'],
+['1', ' ', '1', ' ', '1', ' ', ' ', '1', '1', ' ', ' ', ' ', '1'],
+['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
+['1', ' ', '1', '1', ' ', '1', '1', ' ', ' ', '1', '1', ' ', '1'],
+['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
+['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']]
 const alotOfSquares = [] // array of squares
-const pelletes =[]       // array of white balls   
-const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:0,y:0},color:'red'}),
-new Ghost({position:{x: Square.width*5 + Square.width / 2, y: Square.height *9+ Square.height / 2 }, velocity:{x:1,y:1}, color : 'green'})]
+const pelletes = []       // array of white balls   
+const ghosts = [new Ghost({ position: { x: Square.width * 7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity: { x: 0, y: 0 }, color: 'red' }),
+new Ghost({ position: { x: Square.width * 5 + Square.width / 2, y: Square.height * 9 + Square.height / 2 }, velocity: { x: 1, y: 1 }, color: 'green' })]
 
 
 //=============== creating the squares  and the pellets on the canavas
@@ -93,15 +93,16 @@ Squares.forEach((row, index1) => {
                 })
                 )
                 break
-             case ' ':
-               pelletes.push(new Pellete({
-                   position: {
-                        x: Square.width * index2+Square.width/2,
-                       y: Square.height * index1 +Square.height/2}
-               })
-               )
-               break
-         }
+            case ' ':
+                pelletes.push(new Pellete({
+                    position: {
+                        x: Square.width * index2 + Square.width / 2,
+                        y: Square.height * index1 + Square.height / 2
+                    }
+                })
+                )
+                break
+        }
     })
 })
 
@@ -111,14 +112,14 @@ class PacMan {
         this.position = position
         this.velocity = velocity
         this.radius = 13
-        this .radians = 0.75
+        this.radians = 0.75
         this.openRate = 0.12
     }
     draw() {
         ctx.beginPath()
         ctx.fillStyle = 'yellow'
-        ctx.lineTo(this.position.x,this.position.y)
-        ctx.arc(this.position.x, this.position.y, this.radius,this.radians, Math.PI * 2-this.radians)
+        ctx.lineTo(this.position.x, this.position.y)
+        ctx.arc(this.position.x, this.position.y, this.radius, this.radians, Math.PI * 2 - this.radians)
         ctx.fill()
         ctx.closePath()
     }
@@ -126,8 +127,8 @@ class PacMan {
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
-        if (this.radians<0|| this.radians>.75) this.openRate= - this.openRate
-this.radians+= this.openRate
+        if (this.radians < 0 || this.radians > .75) this.openRate = - this.openRate
+        this.radians += this.openRate
     }
 }
 
@@ -146,100 +147,103 @@ pacman.update();
 let animationId
 
 function moving() {
-    animationId=requestAnimationFrame(moving)
+    animationId = requestAnimationFrame(moving)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    pelletes.forEach((Pellete,index)=> {
+    pelletes.forEach((Pellete, index) => {
         Pellete.draw()
 
-        if (Math.hypot(Pellete.position.x-pacman.position.x,Pellete.position.y-pacman.position.y)< (Pellete.radius+pacman.radius )){
-            pelletes.splice(index,1)
-            score+=10
-            scores.innerHTML=score
+        if (Math.hypot(Pellete.position.x - pacman.position.x, Pellete.position.y - pacman.position.y) < (Pellete.radius + pacman.radius)) {
+            pelletes.splice(index, 1)
+            score += 10
+            scores.innerHTML = score
         }
-        if (score === 980) { prompt('you won')}
+        if (score === 980) { prompt('you won') }
     })
     alotOfSquares.forEach((Square) => {
         Square.draw()
-  // ========= collision with squares    
-       if (circleCollidesWithRectangle({circle:pacman,rectangle:Square})){
-pacman.velocity.y = 0
-pacman.velocity.x = 0
-//           
-  }
+        // ========= collision with squares    
+        if (circleCollidesWithRectangle({ circle: pacman, rectangle: Square })) {
+            pacman.velocity.y = 0
+            pacman.velocity.x = 0
+            //           
+        }
     })
     pacman.update()
-    ghosts.forEach((ghost) =>{
+    ghosts.forEach((ghost) => {
         ghost.update()
-        if (Math.hypot(ghost.position.x-pacman.position.x,ghost.position.y-pacman.position.y)< (ghost.radius+pacman.radius )){
+        if (Math.hypot(ghost.position.x - pacman.position.x, ghost.position.y - pacman.position.y) < (ghost.radius + pacman.radius)) {
             cancelAnimationFrame(animationId)
-        console.log('you lose')   
-        const stop = prompt('you lost')
+            console.log('you lose')
+            const stop = prompt('Game Over')
         }
         const collisions = []
-        alotOfSquares.forEach(square=>{
+        alotOfSquares.forEach(square => {
             if (
                 !collisions.includes('right') && circleCollidesWithRectangle({
-                circle:{
-                    ...ghost,
-                    velocity:{
-                        x:5,
-                        y:0
-                    }
-                },
-                rectangle:square
-            })
-            ){collisions.push('right')}
+                    circle: {
+                        ...ghost,
+                        velocity: {
+                            x: 5,
+                            y: 0
+                        }
+                    },
+                    rectangle: square
+                })
+            ) { collisions.push('right') }
 
             if (
                 !collisions.includes('left') && circleCollidesWithRectangle({
-                circle:{
-                    ...ghost,
-                    velocity:{
-                        x:-5,
-                        y:0
-                    }
-                },
-                rectangle:square
-            })
-            ){collisions.push('left')}
+                    circle: {
+                        ...ghost,
+                        velocity: {
+                            x: -5,
+                            y: 0
+                        }
+                    },
+                    rectangle: square
+                })
+            ) { collisions.push('left') }
 
             if (
                 !collisions.includes('down') && circleCollidesWithRectangle({
-                circle:{
-                    ...ghost,
-                    velocity:{
-                        x:0,
-                        y:5
-                    }
-                },
-                rectangle:square
-            })
-            ){collisions.push('down')}
+                    circle: {
+                        ...ghost,
+                        velocity: {
+                            x: 0,
+                            y: 5
+                        }
+                    },
+                    rectangle: square
+                })
+            ) { collisions.push('down') }
 
             if (
                 !collisions.includes('up') && circleCollidesWithRectangle({
-                circle:{
-                    ...ghost,
-                    velocity:{
-                        x:0,
-                        y:-5
-                    }
-                },
-                rectangle:square
-            })
-            ){collisions.push('up')
-        }
+                    circle: {
+                        ...ghost,
+                        velocity: {
+                            x: 0,
+                            y: -5
+                        }
+                    },
+                    rectangle: square
+                })
+            ) {
+                collisions.push('up')
+            }
 
         })
-        if (collisions.length> ghost.prevCollisions.length)
-        ghost.prevCollisions = collisions
-        if(JSON.stringify(collisions)!== JSON.stringify (ghost.prevCollisions)){
-if (ghost.velocity.x> 0 ){ ghost.prevCollisions.push('right')
-console.log(collisions)}
-            
-const pathways = ghost.prevCollisions.filter((collision)=>{
-    return !collisions.includes(collision)
-})
+        if (collisions.length > ghost.prevCollisions.length)
+            ghost.prevCollisions = collisions
+        if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
+            if (ghost.velocity.x > 0) {
+                ghost.prevCollisions.push('right')
+                console.log(collisions)
+            }
+
+            const pathways = ghost.prevCollisions.filter((collision) => {
+                return !collisions.includes(collision)
+            })
         }
     })
 }
@@ -280,15 +284,15 @@ window.addEventListener('keyup', ({ key }) => {
     }
 })
 
-function circleCollidesWithRectangle({circle,rectangle}){
-    const padding = Square.width/2-circle.radius-1
-    return (circle.position.y - circle.radius+circle.
-        velocity.y  <= rectangle.position.y + rectangle.height+padding
-        && circle.position.x + circle.radius +circle.velocity.x>= rectangle.
-        position.x - padding
-         && circle.position.y + circle.radius+circle.velocity.y >= rectangle.
-         position.y - padding
-          && circle.position.x - circle.radius+circle.velocity.x <= rectangle.position.x + rectangle.
-          width+ padding) 
+function circleCollidesWithRectangle({ circle, rectangle }) {
+    const padding = Square.width / 2 - circle.radius - 1
+    return (circle.position.y - circle.radius + circle.
+        velocity.y <= rectangle.position.y + rectangle.height + padding
+        && circle.position.x + circle.radius + circle.velocity.x >= rectangle.
+            position.x - padding
+        && circle.position.y + circle.radius + circle.velocity.y >= rectangle.
+            position.y - padding
+        && circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.
+            width + padding)
 }
 
