@@ -77,7 +77,7 @@ const Squares = [['1','1','1', '1','1','1','1','1','1','1','1', '1','1'],
 const alotOfSquares = [] // array of squares
 const pelletes =[]       // array of white balls   
 const ghosts = [new Ghost({position:{x: Square.width*7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity:{x:0,y:0},color:'red'}),
-new Ghost({position:{x: Square.width*5 + Square.width / 2, y: Square.height *9+ Square.height / 2 }, velocity:{x:1,y:1}, color : 'green'})]
+new Ghost({position:{x: Square.width*2 + Square.width / 2, y: Square.height *2+ Square.height / 2 }, velocity:{x:1,y:1}, color : 'green'})]
 
 
 //=============== creating the squares  and the pellets on the canavas
