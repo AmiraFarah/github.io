@@ -173,7 +173,7 @@ pacman.velocity.x = 0
         if (Math.hypot(ghost.position.x-pacman.position.x,ghost.position.y-pacman.position.y)< (ghost.radius+pacman.radius )){
             cancelAnimationFrame(animationId)
         console.log('you lose')   
-        const stop = prompt('you lost')
+        const stop = prompt('Game Over')
         }
         const collisions = []
         alotOfSquares.forEach(square=>{
