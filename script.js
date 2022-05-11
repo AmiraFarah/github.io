@@ -1,3 +1,59 @@
+
+
+// ==========colors===========
+//const colorRed = 'rgba(255,26,104,1)'
+// const colorBlue ='rgba(54,162,235,1)'
+// const colorYellow = 'rgba(255,206,86,1)'
+// const colorGreen = 'rgba(75,192,192,1)'
+
+// ================ creating Pacman =================
+// const radius = 50;
+// const angle = Math.PI/180;
+// ctx.beginPath();
+// ctx.strokeStyle = colorYellow;
+// ctx.fillStyle = colorYellow;
+
+// ctx.lineWidth = 3;
+// ctx.arc(350, 300, 25, angle*30, angle* 330, false)
+// ctx.lineTo(350,300)
+// ctx.closePath()
+// ctx.stroke()
+// ctx.fill()=colorYellow
+
+//================== creating Pinky===============
+// pinky.beginPath();
+// pinky.strokeStyle = colorBlue;
+// pinky.linewidth=3;
+// pinky.moveTo(400,200)
+// pinky.lineTo(400,200);
+// pinky.stroke();
+// pinky.beginPath();
+// pinky.strokeStyle=(colorRed);
+// pinky.lineWidth = 3;
+// pinky.arc(350,200,30, angle*180 , angle * 0, false)
+// pinky.lineTo(380,210)
+// pinky.lineTo(380,240);
+// pinky.lineTo(380,240);
+// pinky.lineTo(370,240);
+// pinky.lineTo(360,260);
+// pinky.lineTo(350,240);
+// pinky.lineTo(340,250);
+// pinky.lineTo(330,250);
+// pinky.lineTo(330,240);
+// pinky.lineTo(310,250);
+// pinky.lineTo(310,250);
+// pinky.closePath()
+// pinky.stroke();
+// //=============creating eyes=========
+// pinky.beginPath();
+// pinky.strokeStyle=colorRed;
+// pinky.lineWidth=3;
+// pinky.arc(330, 200, 5, angle*0, angle*360 ,false)
+// pinky.arc(370, 200, 5, angle*0, angle*360 ,false)
+// pinky.stroke();
+// pinky.fill();
+
+
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 const scores = document.querySelector('#sEl')
@@ -62,7 +118,7 @@ class Pellete {
 }
 const Squares = [['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
 ['1', '.', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
-['1', ' ', ' ', '1', ' ', '1', '1', '1', ' ', '1', '1', ' ', '1'],
+['1', ' ', ' ', '1', '1', '1', '1', '1', ' ', '1', '1', ' ', '1'],
 ['1', ' ', ' ', ' ', ' ', ' ', '1', ' ', ' ', ' ', ' ', ' ', '1'],
 ['1', ' ', '1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
 ['1', ' ', ' ', '1', ' ', ' ', '1', ' ', ' ', '1', '1', ' ', '1'],
@@ -77,7 +133,7 @@ const Squares = [['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1
 const alotOfSquares = [] // array of squares
 const pelletes = []       // array of white balls   
 const ghosts = [new Ghost({ position: { x: Square.width * 7 + Square.width / 2, y: Square.height + Square.height / 2 }, velocity: { x: 0, y: 0 }, color: 'red' }),
-new Ghost({ position: { x: Square.width * 5 + Square.width / 2, y: Square.height * 9 + Square.height / 2 }, velocity: { x: 1, y: 1 }, color: 'green' })]
+new Ghost({ position: { x: Square.width * 2 + Square.width / 2, y: Square.height * 2 + Square.height / 2 }, velocity: { x: 1, y: 1 }, color: 'green' })]
 
 
 //=============== creating the squares  and the pellets on the canavas
@@ -266,7 +322,7 @@ window.addEventListener('keydown', ({ key }) => {
             break
     }
 })
-//=============================when we are releasing  the keys
+//=============================when we are releasing  the keys======================
 window.addEventListener('keyup', ({ key }) => {
     switch (key) {
         case 'ArrowUp':
